@@ -1,52 +1,49 @@
-import React, { useState, useEffect, Fragment } from 'react';
-import {Button, Card, Container, Row, Col} from 'react-bootstrap';
-import countapi from 'countapi-js';
-import axios from 'axios';
+import React, { Fragment } from 'react';
+import {Button, Card, Spinner} from 'react-bootstrap';
+
+import Icon from './UI/Icon';
 
 import styles  from './Counter.module.css';
 
-const API_KEY = '1ccb732e-b55a-4404-ad3f-0f99c02fe44e';
-
 const Counter = (props) => {
-    const [count, setCount] = useState(0);
-    const [displayCount, setDisplayCount] = useState(0);
-
-    const handleCounterClick = (e) => {
-        setDisplayCount(count);
+    const handleClick = () => {
+        props.onClick();
     }
-    
-    useEffect(() => {
-        const axiosConfig = {
-            headers: {
-                "Content-Type": "application/json"
-            }
-        };
-
-        const getUrl = `https://api.countapi.xyz/hit/namespace/${API_KEY}`;
-        axios.get(getUrl, axiosConfig).then(res => {
-                if (res) {
-                    setCount(res.data);
-                }
-            })
-            .catch(error => {
-                console.log(error.message);
-            });
-
-    }, []);
-    
+ 
+    if(props.isLoading){
+        return (
+            <Fragment>
+                <Card className={styles.card}>
+                    <div className={[styles['content-container'], styles['center-content']].join(' ')}>
+                        <Spinner animation="border" role="status" size="lg" variant="primary">
+                            <span className="visually-hidden">Loading...</span>
+                        </Spinner>
+                    </div>
+                    
+                    <div className={[styles['button-container'], styles['center-content']].join(' ')}>
+                        
+                        <Button variant="outline-primary" date-type="get" onClick={handleClick} disabled>
+                            <Icon size="sm" name="mouse-pointer" color="blue" /> Get Count
+                        </Button>
+                        
+                    </div>
+                </Card>
+            </Fragment>
+        )
+    }
     return (
         <Fragment>
             <Card className={styles.card}>
-                <div className={styles['center-content']}>
+                <div className={[styles['content-container'], styles['center-content']].join(' ')}>
                     <h1 className={styles.counter}>
-                        {displayCount}
+                        {props.displayCount}
                     </h1>
                 </div>
                 
                  <div className={[styles['button-container'], styles['center-content']].join(' ')}>
                     
-                    <Button variant="outline-primary" date-type="get" onClick={handleCounterClick}>
-                        Get Count
+                    <Button variant="outline-primary" date-type="get" onClick={handleClick}>
+                        <Icon size="sm" name="mouse-pointer" color="blue" /> Get Count
                     </Button>
                     
                 </div>

@@ -3,10 +3,10 @@ import React from 'react';
 import styles from './Icon.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faCube, faExternalLinkAlt, faExclamationTriangle, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faMousePointer } from '@fortawesome/free-solid-svg-icons';
 
 const Icon = (props) => {
-    library.add(faCube, faExternalLinkAlt, faExclamationTriangle, faSearch);
+    library.add(faMousePointer);
     return (
         <FontAwesomeIcon icon={props.name} size={props.size} className={styles[props.color]}/>
     );
