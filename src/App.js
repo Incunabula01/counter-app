@@ -1,24 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {Fragment} from 'react';
+import {Container, Row, Col} from 'react-bootstrap';
+import Counter from '../src/Components/Counter';
+import styles from './App.module.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Fragment>
+      <div className={styles['center-content']}>
+         <Counter/>
+      </div>
+      {/* <Container fluid="md" >
+        <Row>
+          <Col>
+            
+          </Col>
+        </Row>
+      </Container> */}
+    </Fragment>
   );
 }
 
