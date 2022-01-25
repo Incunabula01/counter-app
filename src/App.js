@@ -1,5 +1,5 @@
 import React, {Fragment, useState} from 'react';
-import {Container, Row, Col} from 'react-bootstrap';
+import {Container} from 'react-bootstrap';
 import Counter from '../src/Components/Counter';
 import styles from './App.module.css';
 import axios from 'axios';
@@ -7,6 +7,8 @@ import axios from 'axios';
 const API_KEY = '1ccb732e-b55a-4404-ad3f-0f99c02fe44e';
 
 function App() {
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const [count, setCount] = useState(0);
 
@@ -28,6 +30,8 @@ function App() {
             .catch(error => {
                 console.log(error.message);
                 setLoading(false);
+                setError(true);
+                setErrorMessage(error.message);
             });
     }
 
@@ -38,7 +42,12 @@ function App() {
           <h1>Project Purple Cow</h1>
         </header>
         <div className={styles['center-content']}>
-          <Counter isLoading={loading} displayCount={count} onClick={handleCounterClick}/>
+          <Counter
+            isError={error}
+            errorMessage={errorMessage} 
+            isLoading={loading} 
+            displayCount={count} 
+            onClick={handleCounterClick}/>
         </div>
       </Container>
     </Fragment>
