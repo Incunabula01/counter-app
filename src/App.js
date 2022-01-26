@@ -20,7 +20,7 @@ function App() {
             }
         };
 
-        const getUrl = `https://api.countapi.xyz/hit/namespace/${API_KEY}`;
+        const getUrl = `https://api.countapi.xyz/hit/apple.com/${API_KEY}`;
         axios.get(getUrl, axiosConfig).then(res => {
                 if (res) {
                     setCount(res.data.value);
